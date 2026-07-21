@@ -44,8 +44,6 @@ Once the batch is processed, return a final summary dictionary containing:
 "total_processed": The integer count of fully valid logs.
 
 Sample Test Data
-You can provide this payload for the candidate to test their code against:
-
 JSON
 [
   {"sensor_id": "S01", "zone": "CBD", "vehicle_count": 120, "status": "active"},
