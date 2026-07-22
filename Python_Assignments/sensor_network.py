@@ -47,3 +47,38 @@ def process_sensor_batch(batch_data):
         except NegativeCountError:
             print(f"Sensor {log.get('sensor_id')} is calibrating.")
             failed_sensors.add(log.get("sensor_id"))
+            
+    #calculate zone average
+            
+    zone_averages = {}
+    
+    for zone in zone_data:
+        average = sum(zone_data[zone])/len(zone_data[zone])
+        zone_averages[zone] = round(average, 2)
+        
+    summary = {
+        "zone_averages": zone_averages,
+        "failed_sensors": failed_sensors,
+        "total_processed": total_processed
+        
+    }     
+    
+    return summary
+
+#sample Test Data
+batch_data = [
+    {"sensor_id": "S01", "zone": "CBD", "vehicle_count": 120, "status": "active"},
+    {"sensor_id": "S02", "zone": "CBD", "vehicle_count": "N/A", "status": "active"},
+    {"sensor_id": "S03", "zone": "Westlands", "vehicle_count": 45, "status": "active"},
+    {"sensor_id": "S04", "zone": "Eastleigh", "status": "active"},
+    {"sensor_id": "S05", "zone": "CBD", "vehicle_count": -15, "status": "active"},
+    {"sensor_id": "S06", "zone": "Westlands", "vehicle_count": 80, "status": "maintenance"},
+    {"sensor_id": "S07", "zone": "Eastleigh", "vehicle_count": 310, "status": "active"}
+]
+
+
+#Result
+result = process_sensor_batch(batch_data)
+
+print("\nFinal Summary")
+print(result)
