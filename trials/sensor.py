@@ -68,8 +68,8 @@ def process_sensor_batch(batch_data: List[Dict[str, Any]]) -> Dict[str, Any]:
     
     return {
         "zone_averages": zone_averages,
-        "failed_sensors": failed_sensors,
-        "calibrating_sensors": calibrating_sensors,
+        "failed_sensors": sorted(failed_sensors),
+        "calibrating_sensors": sorted(calibrating_sensors),
         "total_processed": total_processed
     }
 
